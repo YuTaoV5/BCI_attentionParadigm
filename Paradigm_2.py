@@ -103,12 +103,7 @@ class RENZHI(QMainWindow, Ui_MainWindow):
         self.space_ms = 0
         self.no_same_ms = 0
         self.same_ms = 0
-        self.listener = mouse.Listener(
-            on_move=None,
-            on_click=self.on_click,
-            on_scroll=None
-        )
-        self.listener.start()
+
 
         tmp = ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
         self.no_cue_list = ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
@@ -483,8 +478,14 @@ if __name__ == "__main__":
     myWin = RENZHI()
     ###
     myWin.mss_flag = False  # 截图flag
-    myWin.tri_flag = False  # 脑电trigger的flag
+    myWin.tri_flag = True  # 脑电trigger的flag
     ###
+    myWin.listener = mouse.Listener(
+        on_move=None,
+        on_click=myWin.on_click,
+        on_scroll=None
+    )
+    myWin.listener.start()
     myWin.exitButton.clicked.connect(exit)
     myWin.show()
     sys.exit(app.exec_())

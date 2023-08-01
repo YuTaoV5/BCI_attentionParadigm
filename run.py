@@ -17,7 +17,8 @@ import pandas as pd
 import numpy as np
 from PyQt5.QtWidgets import *
 import time
-
+from pynput import mouse
+from pynput import keyboard
     
 def sign_confirm():
         tmp = [login_Win.reg_name.text(), login_Win.gender.text(), login_Win.age.text(), login_Win.disease.text(), login_Win.reg_password.text()]
@@ -48,7 +49,7 @@ def sign_confirm():
             except:
                 pd.DataFrame(data=tmp2).to_csv('login.csv')
 
-            if login_Win.mode.currentText() == "计时":
+            if login_Win.mode.currentText() == "失眠检测范式":
                 if login_Win.checkBox_tri.isChecked():
                     time_Win.tri_flag = True
                     print("check true")
@@ -56,7 +57,15 @@ def sign_confirm():
                     time_Win.tri_flag = False
                     print("check false")
                 time_Win.show()
-            if login_Win.mode.currentText() == "认知":
+            if login_Win.mode.currentText() == "注意力ANT范式":
+                ''''''
+                renZ_Win.listener = mouse.Listener(
+                    on_move=None,
+                    on_click=renZ_Win.on_click,
+                    on_scroll=None
+                )
+                renZ_Win.listener.start()
+                ''''''
                 if login_Win.checkBox_tri.isChecked():
                     renZ_Win.tri_flag = True
                     print("check true")
@@ -64,7 +73,13 @@ def sign_confirm():
                     renZ_Win.tri_flag = False
                     print("check false")
                 renZ_Win.show()
-            if login_Win.mode.currentText() == "SART":
+            if login_Win.mode.currentText() == "注意力SART范式":
+                ''''''
+                sart_Win.keyB_listener = keyboard.Listener(
+                    on_press=sart_Win.on_press,
+                )
+                sart_Win.keyB_listener.start()  # 启动线程
+                ''''''
                 if login_Win.checkBox_tri.isChecked():
                     sart_Win.tri_flag = True
                     print("check true")
@@ -102,7 +117,7 @@ def my_login():
                     pd.DataFrame(data=tmp_data).to_csv('login.csv')
                 except:
                     pd.DataFrame(data=tmp).to_csv('login.csv')
-                if login_Win.mode.currentText()=="计时":
+                if login_Win.mode.currentText()=="失眠检测范式":
                     if login_Win.checkBox_tri.isChecked():
                         time_Win.tri_flag = True
                         print("check true")
@@ -110,7 +125,15 @@ def my_login():
                         time_Win.tri_flag = False
                         print("check false")
                     time_Win.show()
-                if login_Win.mode.currentText()=="认知":
+                if login_Win.mode.currentText()=="注意力ANT范式":
+                    ''''''
+                    renZ_Win.listener = mouse.Listener(
+                        on_move=None,
+                        on_click=renZ_Win.on_click,
+                        on_scroll=None
+                    )
+                    renZ_Win.listener.start()
+                    ''''''
                     if login_Win.checkBox_tri.isChecked():
                         renZ_Win.tri_flag = True
                         print("check true")
@@ -118,7 +141,13 @@ def my_login():
                         renZ_Win.tri_flag = False
                         print("check false")
                     renZ_Win.show()
-                if login_Win.mode.currentText()=="SART":
+                if login_Win.mode.currentText()=="注意力SART范式":
+                    ''''''
+                    sart_Win.keyB_listener = keyboard.Listener(
+                        on_press=sart_Win.on_press,
+                    )
+                    sart_Win.keyB_listener.start()  # 启动线程
+                    ''''''
                     if login_Win.checkBox_tri.isChecked():
                         sart_Win.tri_flag = True
                         print("check true")

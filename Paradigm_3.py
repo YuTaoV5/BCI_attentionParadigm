@@ -75,10 +75,7 @@ class SART(QMainWindow, Ui_MainWindow):
         self.timer.stop()
         self.setfont(200)  # 设置字体大小
 
-        self.listener = keyboard.Listener(
-            on_press=self.on_press,
-        )
-        self.listener.start()  # 启动线程
+
 
         tmp = ['*', '*', '*', '*', '*', '*', '*', '*', '*']
 
@@ -266,8 +263,12 @@ if __name__ == "__main__":
     myWin = SART()
     ###
     myWin.mss_flag = False  # 截图flag
-    myWin.tri_flag = True  # 脑电trigger的flag
+    myWin.tri_flag = False  # 脑电trigger的flag
     ###
+    myWin.keyB_listener = keyboard.Listener(
+        on_press=myWin.on_press,
+    )
+    myWin.keyB_listener.start()  # 启动线程
     myWin.exitButton.clicked.connect(exit)
     myWin.show()
     sys.exit(app.exec_())
